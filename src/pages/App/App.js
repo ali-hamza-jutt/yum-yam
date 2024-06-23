@@ -1,7 +1,8 @@
 import './App.css'
 import Navbar from '../../components/Navbar/Navbar'
 import Carousel from '../../components/Carousel/Carousel'
-import '../../components/Carousel/Carousel.css'
+// import '../../components/Carousel/Carousel.css'
+import CardsContainer from '../../components/CardsContainer/CardsContainer'
 
 const photoUrls = [
   'https://x.yummlystatic.com/web/bubble/cuisine/american.png',
@@ -65,6 +66,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Carousel photos={photoUrls}textArray={text}/>
+      <CardsContainer/>
     </div>
 
   );

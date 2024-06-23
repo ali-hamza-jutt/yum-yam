@@ -1,4 +1,11 @@
 /* src/Carousel.css */
+
+.carousel-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .carousel {
     position: relative;
     overflow: hidden;
@@ -89,5 +96,6 @@
     border:none;
     margin:25px;
     font-weight:500;
+    cursor: pointer;
   }
   
