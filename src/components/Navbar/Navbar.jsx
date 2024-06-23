@@ -8,7 +8,6 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 
 function Navbar(onSubmit) {
   const [input, setInput] = useState('');
-
   const onSearchSubmit = (e) => {
       e.preventDefault();
       onSubmit(input);
