@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Card.css';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 
 function Card({ recipe }) {
-  // Check if recipe is falsy
-  if (!recipe) {
-    return (
-      <p className='loading'>Loading</p>
-    );
-  }
+  const [precisedRating, setPrecisedRating] = useState(null);
+  const [likesCount,setLikesCount]= useState(null);
+  useEffect(() => {
+    if (recipe) {
+      
+      let yumsCount = recipe.content.yums.count/1000;
+      let rating=recipe.content.reviews.averageRating;
+      if((rating&&yumsCount) != null)
+        {
+          setPrecisedRating(rating.toFixed(1));
+          setLikesCount(yumsCount.toFixed(1));
+          
+        }
+      
+    }
+  }, [recipe]);
+
 
   const details = recipe?.content?.details;
-  if (!details) return null;
 
   const { images, name } = details;
   const imageUrl = images && images[0] ? images[0].hostedLargeUrl : '';
 
-  const rating = recipe.content.reviews.averageRating;
-  const yumsCount = recipe.content.yums.count;
   const sourceName = recipe.display.source.sourceDisplayName;
   const ingredientList = recipe.content.ingredientLines;
 
@@ -56,7 +64,7 @@ function Card({ recipe }) {
             >
               <Rating
                 name="read-only"
-                value={rating}
+                value={parseFloat(precisedRating)}
                 readOnly
                 precision={0.1}
               />
@@ -64,7 +72,7 @@ function Card({ recipe }) {
           </p>
         </div>
         <div className="card-details-right">
-          <p className='card-added-recipe-number'>{yumsCount} k</p>
+          <p className='card-added-recipe-number'>{likesCount} k</p>
         </div>
       </div>
     </div>

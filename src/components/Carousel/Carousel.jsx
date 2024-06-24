@@ -31,7 +31,7 @@ const Carousel = ({ photos, textArray }) => {
 
   return (
     <div className="carousel-container">
-        <h5>Personalize you Experience</h5>
+        <h4>Personalize you Experience</h4>
         <h1>Tell us your favourite cuisines</h1>
     <div className="carousel">
       <button className="arrow left-arrow" onClick={handlePrev}>❮</button>
@@ -40,7 +40,7 @@ const Carousel = ({ photos, textArray }) => {
           className="photo-list"
           style={{
             transform: `translateX(0%)`,
-            transition: 'transform 0.5s ease-in-out'
+            transition: 'transform 0.5s ease'
           }}
         >
           {visiblePhotos.map((photo, index) => (
