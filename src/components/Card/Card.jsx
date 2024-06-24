@@ -1,52 +1,74 @@
-import React from 'react'
-import './Card.css'
+import React from 'react';
+import './Card.css';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 
+function Card({ recipe }) {
+  // Check if recipe is falsy
+  if (!recipe) {
+    return (
+      <p className='loading'>Loading</p>
+    );
+  }
 
- 
+  const details = recipe?.content?.details;
+  if (!details) return null;
 
+  const { images, name } = details;
+  const imageUrl = images && images[0] ? images[0].hostedLargeUrl : '';
 
-function Card({rating}) {
+  const rating = recipe.content.reviews.averageRating;
+  const yumsCount = recipe.content.yums.count;
+  const sourceName = recipe.display.source.sourceDisplayName;
+  const ingredientList = recipe.content.ingredientLines;
+
   return (
     <div className="card-container">
-        <div className="card-img">
-            <img src="https://lh3.googleusercontent.com/jFegBTI1rioV8hQZ0SCOu5RXVJ55m5fEZeZdrrJeqWKYwbPsXzNDn6cb_9OGczz7kpQl4lVt0PgL-f7Y63eI0w=w640-h640-c-rw-v1-e365" alt="YumYam" />
-            <div className="image-layer">
-                <p className='layer-text'>spices, eggs, salt, pepper, cheese, vegetables, milk</p>
-            </div>
+      <div className="card-img">
+        <img src={imageUrl} alt={name} />
+        <div className="image-layer">
+          {ingredientList && (
+            <p className="layer-text-container">
+              {ingredientList.map((ingredient, index) => (
+                <span className='layer-text' key={ingredient.id}>
+                  {ingredient.ingredient}{index !== ingredientList.length - 1 ? ', ' : ''}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
-        <div className="card-details">
-            <div className="card-details-left">
-                <p className='card-recipe-name'>Slower Cooker Chicken Marsala</p>
-                <p className='card-recipe-poster'>Simple Nourished Living</p>
-                <p className="card-rating"> 
-                <Box
-                sx={{
-               '& > legend': { mt: 3 },
+      </div>
+      <div className="card-details">
+        <div className="card-details-left">
+          <p className='card-recipe-name'>{name}</p>
+          <p className='card-recipe-poster'>{sourceName}</p>
+          <p className="card-rating">
+            <Box
+              sx={{
+                '& > legend': { mt: 3 },
                 '.MuiRating-iconEmpty': {
-                  color: '#f2f2f2', // Change empty star color here
+                  color: '#f2f2f2',
                 },
                 '.MuiRating-iconFilled': {
-                  color: '#000000', // Change filled star color here
+                  color: '#000000',
                 },
-              }}                >
-                <Rating 
-                name="read-only" 
-                value={rating} 
-                readOnly 
-                precision={0.1} 
-/>
-      
-                </Box>
-            </p>
-            </div>
-            <div className="card-details-right">
-                <p className='card-added-recipe-number'>3k</p>
-            </div>
+              }}
+            >
+              <Rating
+                name="read-only"
+                value={rating}
+                readOnly
+                precision={0.1}
+              />
+            </Box>
+          </p>
         </div>
+        <div className="card-details-right">
+          <p className='card-added-recipe-number'>{yumsCount} k</p>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Card
+export default Card;
