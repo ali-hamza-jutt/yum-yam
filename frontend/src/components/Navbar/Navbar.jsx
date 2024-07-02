@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './Navbar.css';
 import SearchIcon from '@mui/icons-material/Search';
-import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
 import Avatar from '@mui/material/Avatar';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 

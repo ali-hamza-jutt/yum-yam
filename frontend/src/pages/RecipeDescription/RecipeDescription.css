@@ -5,7 +5,7 @@
   .details-section {
     display: flex;
     height: 75vh;
-    padding: 3rem 5rem 5rem 5rem ;
+    margin: 3rem 5rem 5rem 5rem ;
   }
   
   .left-details-section {
@@ -57,7 +57,7 @@
 
   }
 .ingredient-details-container{
-  padding: 3rem 10rem 10rem 10rem ;
+  margin: 3rem 10rem 5rem 10rem ;
 }
 
   .ingredient-details-header{
@@ -69,8 +69,7 @@
     padding: 0 1rem;
   }
 
-  .ingredient-heading{
-    padding: 0;
+  .simple-heading{
     font-size: 24px;
     font-weight: 500;
   }

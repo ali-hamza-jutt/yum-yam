@@ -4,6 +4,9 @@ import Rating from '@mui/material/Rating';
 import Navbar from '../../components/Navbar/Navbar'
 import { useLocation } from 'react-router-dom';
 import ReactReadMoreReadLess from 'react-read-more-read-less';
+import ReviewBox from '../../components/CommentBox/ReviewBox';
+import TextEditor from '../../components/TextEditor/TextEditor';
+import Footer from '../../components/Footer/Footer';
 
 import './RecipeDescription.css'
 
@@ -87,7 +90,7 @@ function RecipeDescription() {
         <div className="ingredient-details-container">
               <div className="ingredient-details-header">
                 <div className='ingredient-details-right-header'>
-                  <p className='ingredient-heading'>Ingredients</p>
+                  <p className='ingredient-heading simple-heading'>Ingredients</p>
                 </div>
                 <div className='ingredient-details-left-header'>
                   <p className="unit-type">US</p>
@@ -146,6 +149,10 @@ function RecipeDescription() {
                 </p>
               </div>
         </div>
+         <TextEditor/>     
+         < ReviewBox/>
+         < ReviewBox/>
+         <Footer/>
     </div>
   )
 }

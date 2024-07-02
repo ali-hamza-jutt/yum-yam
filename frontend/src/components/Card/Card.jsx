@@ -66,7 +66,7 @@ function Card({ recipe }) {
                   color: '#f2f2f2',
                 },
                 '.MuiRating-iconFilled': {
-                  color: '#000000',
+                  color: '##e16120',
                 },
               }}
             >
@@ -83,6 +83,7 @@ function Card({ recipe }) {
           <p className='card-added-recipe-number'>{likesCount} k</p>
         </div>
       </div>
+      
     </div>
   );
 }
