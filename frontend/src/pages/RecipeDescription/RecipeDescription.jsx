@@ -9,6 +9,7 @@ import TextEditor from '../../components/TextEditor/TextEditor';
 import Footer from '../../components/Footer/Footer';
 
 import './RecipeDescription.css'
+import Nutrients from '../../components/Nutrients/Nutrients';
 
 
 function RecipeDescription() {
@@ -149,6 +150,8 @@ function RecipeDescription() {
                 </p>
               </div>
         </div>
+        
+        <Nutrients/>
          <TextEditor/>     
          < ReviewBox/>
          < ReviewBox/>
