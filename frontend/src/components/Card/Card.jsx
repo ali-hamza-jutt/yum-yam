@@ -22,11 +22,11 @@ function Card({ recipe }) {
 
   const details = recipe?.content?.details;
   const id=details.recipeId
-  console.log(details.recipeId)
+  //console.log(details.recipeId)
 
   const handleCardClick = () => {
-    navigate(`/recipeDescription`);
-    // navigate(`/recipeDescription/${id}`, { state: { recipe } }); // Pass the recipe data as state
+    // navigate(`/recipeDescription`);
+    navigate(`/recipeDescription/${id}`, { state: { recipe } }); // Pass the recipe data as state
 
   };
 

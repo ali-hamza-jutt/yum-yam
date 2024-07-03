@@ -11,8 +11,8 @@ const Root = ()=>{
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        {/* <Route path="/recipeDescription/:id" element={<RecipeDescription />} /> */}
-        <Route path="/recipeDescription" element={<RecipeDescription />} />
+        <Route path="/recipeDescription/:id" element={<RecipeDescription />} />
+        {/* <Route path="/recipeDescription" element={<RecipeDescription />} /> */}
       </Routes>
     </Router>
 );
