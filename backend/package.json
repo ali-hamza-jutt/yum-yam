@@ -1,0 +1,19 @@
+{
+  "name": "yum-yam",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+
+  },
+  "author": "ali-hamza",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "moongoose": "^0.0.5"
+  }
+}
