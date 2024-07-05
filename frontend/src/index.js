@@ -5,6 +5,7 @@ import './index.css';
 import App from './pages/App/App';
 import RecipeDescription from './pages/RecipeDescription/RecipeDescription';
 import reportWebVitals from './reportWebVitals';
+import SignupForm from './pages/Signup/SignupForm';
 
 const Root = ()=>{ 
   return(
@@ -13,6 +14,7 @@ const Root = ()=>{
         <Route path="/" element={<App />} />
         <Route path="/recipeDescription/:id" element={<RecipeDescription />} />
         {/* <Route path="/recipeDescription" element={<RecipeDescription />} /> */}
+        <Route path="/register" element={<SignupForm/>}/>
       </Routes>
     </Router>
 );
