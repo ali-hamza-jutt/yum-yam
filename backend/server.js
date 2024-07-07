@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-enco
 
 const PORT = 5000;
 
-app.use(express.json()); // Middleware to parse JSON
 
 // Connect to database
 connectDB();
