@@ -12,16 +12,10 @@ const LoginForm = () => {
     validationSchema: Yup.object({
       email: Yup.string().email('Invalid email address').required('Required'),
       password: Yup.string()
-        .min(8, 'Password must be at least 8 characters')
-        .matches(
-          /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
-          'Password must contain at least one number and one special character'
-        )
         .required('Required'),
     }),
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       setSubmitting(true);
-
       try {
         const response = await axios.post('http://localhost:5000/login', values);
         console.log(response.data);

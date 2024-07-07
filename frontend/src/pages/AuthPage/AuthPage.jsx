@@ -1,7 +1,7 @@
 import React from 'react';
 import SignupForm from '../../components/Signup/SignupForm';
 import './AuthPage.css'; // Import the CSS file for styling
-import LoginForm from '../../components/Login/Login';
+import LoginForm from '../../components/Login/LoginForm';
 
 const AuthPage = () => {
   return (
