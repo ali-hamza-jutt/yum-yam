@@ -3,10 +3,27 @@ import styled from 'styled-components';
 import './Navbar.css';
 import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+//import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import {useAuth} from '../../hooks/AuthContext'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Navbar({ onSubmit }) {
+
+  const navigate=useNavigate();
   const [input, setInput] = useState('');
+  const { isAuthenticated,setIsAuthenticated } = useAuth();
+  console.log(isAuthenticated)
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:5000/logout'); // Make a GET request to logout endpoint
+      setIsAuthenticated(false);
+      navigate('/'); // Redirect to home or login page after logout
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   const onSearchSubmit = (e) => {
     e.preventDefault();
@@ -38,21 +55,31 @@ function Navbar({ onSubmit }) {
           </form>
         </SearchBarWrapper>
       </SearchWrapper>
-      <LoginWrapper>
-        <a href="">
-          <ProfileIcon>
-            <Avatar 
-              alt="Remy Sharp" 
-              src="/static/images/avatar/1.jpg"
-              sx={{ width: 32, height: 32 }}
+      <div>
+      {isAuthenticated ? (
+        <LogoutWrapper>
 
-              />
-          </ProfileIcon>
-          <ProfileName>
-            <p>Junaid</p>
-          </ProfileName>
-        </a>
-      </LoginWrapper>
+        <button onSubmit={handleLogout}>Logout</button>
+      </LogoutWrapper> 
+      ) : (
+          <LoginWrapper>
+          <a href="/">
+            <ProfileIcon>
+              <Avatar 
+                alt="Remy Sharp" 
+                src="/static/images/avatar/1.jpg"
+                sx={{ width: 32, height: 32 }}
+  
+                />
+            </ProfileIcon>
+            <ProfileName>
+              <p>Junaid</p>
+            </ProfileName>
+          </a>
+        </LoginWrapper>
+      )}
+    </div>
+      
       <MenuWrapper>
         <MenuOption>
           <a href="/">Dinners</a>
@@ -191,3 +218,7 @@ const ProfileIcon = styled.div`
 const ProfileName = styled.div`
   font-weight: 600;
 `;
+
+const LogoutWrapper=styled.div`
+
+`

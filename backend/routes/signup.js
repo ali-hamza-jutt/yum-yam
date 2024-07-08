@@ -23,7 +23,15 @@ const signup = async (req, res) => {
       }
 
       passport.authenticate('local')(req, res, () => {
-        res.status(201).json({ message: 'User created successfully' });
+        req.session.user = {
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        };
+        res.status(201).json({
+          isAuthenticated: true,
+          user: req.session.user,
+        });
       });
     });
   } catch (err) {
@@ -33,3 +41,4 @@ const signup = async (req, res) => {
 };
 
 export default signup;
+

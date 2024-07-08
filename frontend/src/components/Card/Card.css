@@ -52,6 +52,7 @@ img {
 /* When the image layer height transition is complete, reveal the text */
 .card-container:hover .image-layer {
     height: 100%;
+    width: 100%;
 }
 
 /* Ensure text remains unchanged */

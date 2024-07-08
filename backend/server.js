@@ -7,13 +7,20 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import User from './models/user.js';
+import cookieParser from 'cookie-parser';
+import logout from './routes/logout.js';
 
 const PORT = 5000;
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true })); // Enable credentials for CORS
+
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
+
 
 // Connect to MongoDB
 connectDB();
@@ -22,8 +29,12 @@ app.use(session({
   secret: 'our yummy recipe',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/yum-yam' }), // Use default options for MongoStore
-  cookie: { secure: false }
+  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/yum-yam' }),
+  cookie: {
+    secure: false, // Set to true if using HTTPS
+    httpOnly: false, // Allow access to cookies from JavaScript
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+  }
 }));
 
 app.use(passport.initialize());
@@ -33,8 +44,11 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+
 app.use('/signup', signup);
 app.use('/login', login);
+app.post('/logout', logout);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

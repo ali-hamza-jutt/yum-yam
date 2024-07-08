@@ -2,8 +2,14 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/AuthContext'; // Import useAuth hook
 
 const SignupForm = () => {
+  const { setIsAuthenticated } = useAuth();
+
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -27,13 +33,15 @@ const SignupForm = () => {
         )
         .required('Required'),
     }),
-    onSubmit: async (values, { setSubmitting, setStatus }) => {
+    onSubmit: async (values, { setSubmitting, setStatus, resetForm }) => {
       setSubmitting(true);
 
       try {
-        const response = await axios.post('http://localhost:5000/signup', values);
-        console.log(response.data);
+        const response = await axios.post('http://localhost:5000/login', values);
         setStatus({ success: true });
+        setIsAuthenticated(response.data.isAuthenticated);
+        resetForm(); // Clear form fields
+        navigate('/');
       } catch (error) {
         console.error(error);
         setStatus({ error: error.message || 'Error creating user' });
@@ -50,19 +58,30 @@ const SignupForm = () => {
         id="firstName"
         type="text"
         {...formik.getFieldProps('firstName')}
+        className="sign-input"
       />
       {formik.touched.firstName && formik.errors.firstName ? (
         <div className="error">{formik.errors.firstName}</div>
       ) : null}
 
       <label htmlFor="lastName">Last Name</label>
-      <input id="lastName" type="text" {...formik.getFieldProps('lastName')} />
+      <input
+        id="lastName"
+        type="text"
+        {...formik.getFieldProps('lastName')}
+        className="sign-input"
+      />
       {formik.touched.lastName && formik.errors.lastName ? (
         <div className="error">{formik.errors.lastName}</div>
       ) : null}
 
       <label htmlFor="email">Email Address</label>
-      <input id="email" type="email" {...formik.getFieldProps('email')} />
+      <input
+        id="email"
+        type="email"
+        {...formik.getFieldProps('email')}
+        className="sign-input"
+      />
       {formik.touched.email && formik.errors.email ? (
         <div className="error">{formik.errors.email}</div>
       ) : null}
@@ -72,12 +91,15 @@ const SignupForm = () => {
         id="password"
         type="password"
         {...formik.getFieldProps('password')}
+        className="sign-input"
       />
       {formik.touched.password && formik.errors.password ? (
         <div className="error">{formik.errors.password}</div>
       ) : null}
 
-      <button type="submit" disabled={formik.isSubmitting}>Submit</button>
+      <button type="submit" disabled={formik.isSubmitting}>
+        Submit
+      </button>
     </form>
   );
 };
