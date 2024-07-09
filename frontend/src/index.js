@@ -6,13 +6,13 @@ import App from './pages/App/App';
 import RecipeDescription from './pages/RecipeDescription/RecipeDescription';
 import reportWebVitals from './reportWebVitals';
 import AuthPage from './pages/AuthPage/AuthPage';
-import { AuthProvider } from './hooks/AuthContext'; // Import the AuthProvider
+// import { AuthProvider } from './hooks/AuthContext'; // Import the AuthProvider
 
 
 const Root = ()=>{ 
   return(
     <Router>
-      <AuthProvider>
+      {/* <AuthProvider> */}
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/recipeDescription/:id" element={<RecipeDescription />} />
@@ -20,7 +20,7 @@ const Root = ()=>{
         <Route path="/authPage" element={<AuthPage/>}/>
         {/* <Route path="/register" element={<SignupForm/>}/> */}
       </Routes>
-        </AuthProvider>
+        {/* </AuthProvider> */}
     </Router>
 );
 }

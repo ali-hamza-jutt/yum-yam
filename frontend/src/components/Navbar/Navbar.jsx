@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import './Navbar.css';
 import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar';
-//import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import {useAuth} from '../../hooks/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Navbar({ onSubmit }) {
-
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [input, setInput] = useState('');
-  const { isAuthenticated,setIsAuthenticated } = useAuth();
-  console.log(isAuthenticated)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+    setIsAuthenticated(authStatus);
+  }, []);
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5000/logout'); // Make a GET request to logout endpoint
-      setIsAuthenticated(false);
-      navigate('/'); // Redirect to home or login page after logout
+      const response = await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
+      if (response.status === 200) {
+        localStorage.removeItem('isAuthenticated');
+        setIsAuthenticated(false);
+        navigate('/'); // Redirect to login page or another appropriate page
+      }
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error('Error logging out:', error);
     }
   };
 
@@ -37,7 +40,6 @@ function Navbar({ onSubmit }) {
           <a href='/'>
             <h1>YumYam</h1>
           </a>
-          
         </LogoText>
       </LogoWrapper>
       <SearchWrapper>
@@ -56,30 +58,27 @@ function Navbar({ onSubmit }) {
         </SearchBarWrapper>
       </SearchWrapper>
       <div>
-      {isAuthenticated ? (
-        <LogoutWrapper>
-
-        <button onSubmit={handleLogout}>Logout</button>
-      </LogoutWrapper> 
-      ) : (
+        {isAuthenticated ? (
+          <LogoutWrapper>
+            <button onClick={handleLogout}>Logout</button>
+          </LogoutWrapper>
+        ) : (
           <LoginWrapper>
-          <a href="/">
-            <ProfileIcon>
-              <Avatar 
-                alt="Remy Sharp" 
-                src="/static/images/avatar/1.jpg"
-                sx={{ width: 32, height: 32 }}
-  
+            <a href="/">
+              <ProfileIcon>
+                <Avatar 
+                  alt="Remy Sharp" 
+                  src="/static/images/avatar/1.jpg"
+                  sx={{ width: 32, height: 32 }}
                 />
-            </ProfileIcon>
-            <ProfileName>
-              <p>Junaid</p>
-            </ProfileName>
-          </a>
-        </LoginWrapper>
-      )}
-    </div>
-      
+              </ProfileIcon>
+              <ProfileName>
+                <p>Junaid</p>
+              </ProfileName>
+            </a>
+          </LoginWrapper>
+        )}
+      </div>
       <MenuWrapper>
         <MenuOption>
           <a href="/">Dinners</a>
@@ -114,9 +113,9 @@ const Wrapper = styled.div`
 
 const LogoWrapper = styled.div`
   display: flex;
-  a{
-    text-decoration:none;
-    color:#000000;
+  a {
+    text-decoration: none;
+    color: #000000;
   }
 `;
 
@@ -137,7 +136,7 @@ const SearchBarWrapper = styled.div`
   border-radius: 50px;
   height: 36px;
   margin: 0 25px;
-  padding: 0 10px; /* Add padding to ensure space between input and icon */
+  padding: 0 10px;
   form {
     display: flex;
     flex: 1;
@@ -150,13 +149,12 @@ const SearchInput = styled.input`
   border: none;
   font-size: 16px;
   margin-right: 5px;
-  padding-right: 20px; /* Adjust padding to make space for the icon */
+  padding-right: 20px;
   
   &:focus {
-    outline: none; /* Remove outline on focus */
+    outline: none;
   }
 `;
-
 
 const IconButton = styled.button`
   background: none;
@@ -175,16 +173,16 @@ const MenuWrapper = styled.div`
 const MenuOption = styled.div`
   margin: 7px;
   a {
-    position: relative; /* Ensure proper positioning context for ::before */
+    position: relative;
     text-decoration: none;
     color: black;
     font-weight: 600;
-    overflow: hidden; /* Ensure overflow is hidden to prevent jumping */
-    transition: color 0.3s ease-in-out; /* Smooth color transition */
+    overflow: hidden;
+    transition: color 0.3s ease-in-out;
     
     &::before {
       content: '';
-      background-color: #000000; /* Adjust based on your primary color */
+      background-color: #000000;
       width: 100%;
       height: 1.5px;
       position: absolute;
@@ -192,11 +190,11 @@ const MenuOption = styled.div`
       bottom: -1px;
       transform: scaleX(0);
       transform-origin: bottom left;
-      transition: transform 0.3s ease-in-out; /* Smooth transition for transform */
+      transition: transform 0.3s ease-in-out;
     }
 
     &:hover::before {
-      transform: scaleX(1); /* Expand the underline on hover */
+      transform: scaleX(1);
     }
   }
 `;
@@ -212,13 +210,23 @@ const LoginWrapper = styled.div`
 `;
 
 const ProfileIcon = styled.div`
-  margin:0 7px;
+  margin: 0 7px;
 `;
 
 const ProfileName = styled.div`
   font-weight: 600;
 `;
 
-const LogoutWrapper=styled.div`
-
-`
+const LogoutWrapper = styled.div`
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: black;
+    font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;

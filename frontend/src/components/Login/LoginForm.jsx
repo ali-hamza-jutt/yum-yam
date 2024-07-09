@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/AuthContext'; // Import useAuth hook
 
 const LoginForm = () => {
-  const { setIsAuthenticated, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -21,9 +19,10 @@ const LoginForm = () => {
     onSubmit: async (values, { setSubmitting, setStatus, resetForm }) => {
       setSubmitting(true);
       try {
-        const response = await axios.post('http://localhost:5000/login', values);
+        const response = await axios.post('http://localhost:5000/login', values, { withCredentials: true });
+        console.log(response)
         setStatus({ success: true });
-        setIsAuthenticated(response.data.isAuthenticated);
+        localStorage.setItem('isAuthenticated', 'true'); // Store authentication status in local storage
         resetForm(); // Clear form fields
         navigate('/');
       } catch (error) {
@@ -34,10 +33,6 @@ const LoginForm = () => {
       }
     },
   });
-
-  useEffect(() => {
-    console.log(isAuthenticated); // Log isAuthenticated whenever it changes
-  }, [isAuthenticated]); // Only run this effect when isAuthenticated changes
 
   return (
     <form onSubmit={formik.handleSubmit} className="form">

@@ -3,10 +3,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/AuthContext'; // Import useAuth hook
 
 const SignupForm = () => {
-  const { setIsAuthenticated } = useAuth();
 
   const navigate = useNavigate();
 
@@ -37,19 +35,21 @@ const SignupForm = () => {
       setSubmitting(true);
 
       try {
-        const response = await axios.post('http://localhost:5000/login', values);
+        const response = await axios.post('http://localhost:5000/signup', values, { withCredentials: true });
+        console.log(response)
         setStatus({ success: true });
-        setIsAuthenticated(response.data.isAuthenticated);
+        localStorage.setItem('isAuthenticated', 'true'); // Store authentication status in local storage
         resetForm(); // Clear form fields
         navigate('/');
       } catch (error) {
         console.error(error);
-        setStatus({ error: error.message || 'Error creating user' });
+        setStatus({ error: error.message || 'Error logging in' });
       } finally {
         setSubmitting(false);
       }
     },
   });
+
 
   return (
     <form onSubmit={formik.handleSubmit} className="form">

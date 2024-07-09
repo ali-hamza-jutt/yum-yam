@@ -1,6 +1,5 @@
 import passport from 'passport';
 
-
 const login = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
@@ -15,24 +14,13 @@ const login = (req, res, next) => {
         return next(err);
       }
 
-      // Set secure cookie (if using HTTPS) and httpOnly for security
-      res.cookie('user', JSON.stringify({
-        email: user.email,
-        name: user.firstName + user.lastName,
-      }), {
-        maxAge: 1000 * 60 * 60 * 24, // 1 day
-        httpOnly: true,
-        secure: false // Set to true if using HTTPS (recommended)
-      });
-
       return res.status(200).json({
         message: 'Login successful',
-        isAuthenticated: true
+        isAuthenticated: true,
+        sessionID: req.sessionID // Optionally include session ID in the response
       });
     });
   })(req, res, next);
 };
-
-// ... other routes and app.listen
 
 export default login;

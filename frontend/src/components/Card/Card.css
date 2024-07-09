@@ -33,6 +33,7 @@ img {
     transition: height 0.3s ease; /* Smooth transition for height */
     display: flex;
     align-items: flex-end;
+    
 }
 
 .layer-text {
