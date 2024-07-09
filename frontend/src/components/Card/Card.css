@@ -82,16 +82,16 @@ img {
 }
 .card-recipe-name {
     font-size: 15px;
-    margin: 5px;
+    margin: 5px 5px 10px 5px;
 }
 
 .card-recipe-poster {
     font-size: 13px;
     font-weight: 100;
-    margin: 5px;
+    margin: 5px 5px 10px 5px;
 }
 
 .card-added-recipe-number {
-    margin: 5px;
+    margin: 5px 5px 10px 5px;
     font-weight: 100;
 }

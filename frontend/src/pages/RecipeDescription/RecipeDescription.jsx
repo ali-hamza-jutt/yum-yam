@@ -49,7 +49,7 @@ function RecipeDescription() {
                 <div className="left-details-section">
                     <h1 className='recipe-name'>{name}</h1>
                     <p className='source-name'>{sourceName}</p>
-                    <p className='rating'>
+                    <p className='description-rating'>
                         <Box
                             sx={{
                                 '& > legend': { mt: 3 },

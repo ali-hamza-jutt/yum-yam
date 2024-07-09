@@ -52,7 +52,7 @@
     justify-content: flex-end;
   }
   
-  button {
+  .add-note-button {
     background-color: transparent;
     color:#36454F	;
     padding: 10px;
@@ -92,7 +92,7 @@
     display: flex;
   }
 
-  .buttons button{
+  .buttons button{ 
     background-color: #3a9691;
     color: #fff;
     padding: 8px 28px;

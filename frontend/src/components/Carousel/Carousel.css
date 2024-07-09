@@ -13,6 +13,9 @@
     margin: 0 auto; /* Center the carousel horizontally */
   }
   
+.carousel-container h1,h4{
+  margin-bottom: 1.5rem;
+}
   .photo-container {
     position: relative;
     overflow: hidden;

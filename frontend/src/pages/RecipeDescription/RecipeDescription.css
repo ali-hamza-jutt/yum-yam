@@ -1,12 +1,9 @@
-/* .recipe-description-container {
-    
-  } */
-  
-  .details-section {
-    display: flex;
-    height: 75vh;
-    margin: 3rem 5rem 5rem 5rem ;
-  }
+
+.details-section {
+  display: flex;
+  height: 75vh;
+  margin: 3rem 5rem 5rem 5rem ;
+}
   
   .left-details-section {
     flex: 0.4;
@@ -31,8 +28,15 @@
     color: rgb(0, 0,0,0.5);
     font-size: 18px;
     font-weight: 600;
+    margin-bottom: 1rem;
   }
   
+  .description-rating{
+    margin-bottom: 10px;
+  }
+  .recipe-description {
+    margin-bottom: 1rem;
+    }
   .cooking-details{
     display: flex;
     justify-content: space-between;
@@ -42,17 +46,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1rem;
   }
 
 
   .value{
     font-size: 32px;
-    margin: 0;
+    margin-bottom: 1rem;
 
   }
   .detail-name{
-    margin: 0;
-    padding: 0;
+    margin-bottom: 1rem;
     color: rgb(0, 0,0,0.5);
 
   }
@@ -63,6 +67,7 @@
   .ingredient-details-header{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
   }
 
   .ingredient-details-header p{
@@ -72,16 +77,17 @@
   .simple-heading{
     font-size: 24px;
     font-weight: 500;
+    margin-bottom: 1rem;
   }
   .ingredient-details-left-header{
     display: flex;
   }
 
-  .ingredient-details{
 
-  }
 .ingredient-detail{
   padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+
 }
   .ingredient-name{
     font-weight: bold;

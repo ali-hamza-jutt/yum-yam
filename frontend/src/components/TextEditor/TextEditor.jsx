@@ -66,7 +66,7 @@ const TextEditor = () => {
     <div className="text-editor">
       <div className="text-editor-header">
         <h2>Notes</h2>
-        <button onClick={handleAddNote}>
+        <button className='add-note-button' onClick={handleAddNote}>
           <NoteAddOutlinedIcon style={{ margin: '5px', color: '#3a9691' }} />
           Add Note
         </button>

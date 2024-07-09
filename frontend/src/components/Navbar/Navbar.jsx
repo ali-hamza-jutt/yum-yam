@@ -109,6 +109,7 @@ const Wrapper = styled.div`
   padding: 12px 4px 4px 12px;
   background-color: white;
   color: black;
+  margin:0.5rem 0 1.5rem 0;
 `;
 
 const LogoWrapper = styled.div`
